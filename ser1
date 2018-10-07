@@ -1,0 +1,4 @@
+service { "vsftpd" ;
+   ensure => 'running',
+   enable => true
+        }
