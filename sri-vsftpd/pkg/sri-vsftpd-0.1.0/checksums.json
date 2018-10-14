@@ -1,0 +1,14 @@
+{
+  "README.md": "7c8a83fa6970b60ee93d3d819b02ff82",
+  "Rakefile": "20b80e526e351a74df2001f504e756d2",
+  "manifests/config.pp": "f6826ee5a33dbd53ae158f142c1af45e",
+  "manifests/init.pp": "c659930bd69a14bc2aeac9a623806103",
+  "manifests/package.pp": "a7d4aae2dffa1656dfa9d66c16f3b363",
+  "manifests/params.pp": "a742ba0003f27f532592c887d73ffa60",
+  "manifests/service.pp": "19432a4b9174177cdb907cd26a846943",
+  "metadata.json": "7a17f6750f0d24d77d23ce3119b59795",
+  "spec/classes/init_spec.rb": "9eb209357f93f9b91b7c68a478397a32",
+  "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+  "templates/vsftpd.conf.erb": "7b57363f44c5b810fd50d70761ceeb0b",
+  "tests/init.pp": "cd5a9aa2ee5195c46eee6cc5bff3db67"
+}
