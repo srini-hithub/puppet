@@ -1,0 +1,9 @@
+{
+  "README.md": "22c453f844b0e6a185c059c73fce1734",
+  "Rakefile": "20b80e526e351a74df2001f504e756d2",
+  "manifests/init.pp": "dea3c20022a43cdb20164c2647ca23fc",
+  "metadata.json": "04774f1208d67871d29750c6961541b0",
+  "spec/classes/init_spec.rb": "65e9dfd5edf0812708682fe2adc4af1f",
+  "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+  "tests/init.pp": "981bf1e4428bc7900ea22c738660c52b"
+}
