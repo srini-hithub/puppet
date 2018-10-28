@@ -1,0 +1,119 @@
+
+To deploy the puppet code in the Puppet 5.3:
+
+
+==> Ensure the puppet server and client setup is done and signing is perfect.
+
+
+1. Define the the environment.
+	
+    - copy the existing production directory to required folder.
+
+	example : cp -rf /etc/puppetlabs/code/environments/production  /etc/puppetlabs/code/environments/QA
+
+
+2. Declare the resouce in the - write a pp file in the manifests.
+
+  
+    /etc/puppetlabs/code/environments/QA/manifests/file.pp
+
+
+3. On the agent side verify the configuration - 
+	
+   
+    puppet config print |grep -i environment
+
+   set the correct environment to QA
+
+    puppet config set environments QA
+
+    Apply the puppet run -
+
+     puppet agent -t
+
+  Note : This deployment is ad-hoc deployment using the puppet server.
+
+
+4. To deploy the module:
+
+
+     => Generate a puppet module 
+
+     puppet module generate sri-modulename
+
+  => we can copy the module to respective environment locations.
+
+     cp modulename /etc/puppetlabs/code/environment/production/modules/
+  
+     or 
+   
+     puppet module install modulename  --modulepath=/etc/puppetlabs/code/environments/QA/modules
+
+
+ To call the module :
+=====================
+
+  => Define the module name in the site.pp in the respective environment's manifests folde.
+
+ 
+     vi /etc/puppetlabs/code/environment/QA/manifests/site.pp
+
+      ##we can call with the wild card or default key word.
+		
+      ## The below config applies to all the agents.
+       
+      node default {
+
+        include module_name
+  
+        }
+
+  or 
+       node * {
+
+       include module_name
+	
+          }
+
+
+To deploy a specific nodes
+
+
+
+    node '<server1>' , '<server2>'  {
+
+
+     include module_specific
+     
+   }
+
+
+===============================================
+
+Puppet server memory configuratuion:
+
+==>/etc/sysconfig/puppetserver
+
+
+JAVA_ARGS="-Xms2g -Xmx2g  => default setting in the /etc/sysconfig/puppetserver
+
+This need to be changed as following.
+
+JAVA_ARGS="-Xms512m -Xmx512m 
+
+https://puppet.com/docs/puppet/5.3/puppet_platf
+orm.html
+
+
+
+Client side configuration:
+===========================
+
+/etc/puppetlabs/puppet/puppet.conf
+
+
+All pp files are available in the below link. you can git clone this file
+
+https://github.com/srini-hithub/puppet.git
+
+     

@@ -1,0 +1,84 @@
+
+vi params  
+class module::params {
+
+   $pkg = ['httpd','openssh' ] 
+   $config = /var/www/html/index.html
+   $config2 = /etc/ssh/sshd_config
+   $service = httpd
+}
+
+vi pkg.pp
+
+class module::pkg inherits module {
+
+  package { $pkg:
+
+        ensure => 'present'
+	
+     }
+
+} 
+
+ vi config.pp
+
+class module::config inherits module { 
+
+ file { [ $config , $config2 ]:
+	ensure => 'file',
+	content => "This is to intall the package"
+      }
+
+}	
+
+vi service.pp
+
+class module::service inherits module {
+
+    service { $sevice:
+
+	ensure => 'running',
+	enable =>  true
+      }
+ }
+
+# To call the pp files into the main class:
+
+vi init.pp
+
+class module (
+
+$pkg = $module::pkg::['httpd','openssh' ]
+$config = $module::config::/var/www/html/index.htm
+$service = $module::service::httpd
+-
+) inherits module::params {
+
+class [ '::module::pkg:' ]
+class [ '::module::config:' ]
+class [ '::module::service:' ]
+
+}
+
+
+example of the calling into init.pp
+
+
+# ntp/manifests/init.pp
+class ntp (
+     # allow for overrides using resource syntax or data bindings
+     $config = $ntp::params::config,
+     $keys_file = $ntp::params::keys_file
+   ) inherits ntp::params {
+ 
+   # validate values supplied
+   validate_absolute_path($config)
+   validate_absolute_path($keys_file)
+ 
+   # optionally derive new data from supplied data
+ 
+   # use data
+   file{$config:
+      ....
+   }
+}
